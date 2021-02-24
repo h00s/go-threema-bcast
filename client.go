@@ -8,13 +8,15 @@ const BaseURL = "https://broadcast.threema.ch/api/v1"
 type Client struct {
 	HTTPClient *http.Client
 	BaseURL    string
+	APIKey     string
 }
 
 // NewClient constructs a client using http.DefaultClient and the default
 // base URL. The returned client is ready for use.
-func NewClient() *Client {
+func NewClient(APIKey string) *Client {
 	return &Client{
 		HTTPClient: http.DefaultClient,
 		BaseURL:    BaseURL,
+		APIKey:     APIKey,
 	}
 }
