@@ -1,6 +1,10 @@
 package go_threema_bcast
 
-import "net/http"
+import (
+	"fmt"
+	"io"
+	"net/http"
+)
 
 // BaseURL is the default base URL for the Threema Broadcast API
 const BaseURL = "https://broadcast.threema.ch/api/v1"
@@ -19,4 +23,28 @@ func NewClient(APIKey string) *Client {
 		BaseURL:    BaseURL,
 		APIKey:     APIKey,
 	}
+}
+
+func (c *Client) Get(path string) ([]byte, error) {
+	req, err := http.NewRequest("GET", c.BaseURL+path, nil)
+	if err != nil {
+		return nil, fmt.Errorf("failed to build request: %v", err)
+	}
+	req.Header.Add("X-Api-Key", c.APIKey)
+
+	resp, err := c.HTTPClient.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("failed to do request: %v", err)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != 200 {
+		return nil, fmt.Errorf("returned status code: %v", resp.StatusCode)
+	}
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read body: %v", err)
+	}
+	return body, nil
 }
