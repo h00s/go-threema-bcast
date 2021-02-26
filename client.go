@@ -15,6 +15,15 @@ type Client struct {
 	APIKey     string
 }
 
+type Links struct {
+	Links []Link `json:"_links"`
+}
+
+type Link struct {
+	Ref  string `json:"ref"`
+	Link string `json:"link"`
+}
+
 // NewClient constructs a client using http.DefaultClient and the default
 // base URL. The returned client is ready for use.
 func NewClient(APIKey string) *Client {
