@@ -39,7 +39,8 @@ func (c *Client) Get(path string) ([]byte, error) {
   if err != nil {
     return nil, fmt.Errorf("failed to build request: %v", err)
   }
-  req.Header.Add("X-Api-Key", c.APIKey)
+  req.Header.Set("X-Api-Key", c.APIKey)
+  req.Header.Set("Content-Type", "application/json")
 
   resp, err := c.HTTPClient.Do(req)
   if err != nil {
@@ -55,5 +56,6 @@ func (c *Client) Get(path string) ([]byte, error) {
   if err != nil {
     return nil, fmt.Errorf("failed to read body: %v", err)
   }
+
   return body, nil
 }
