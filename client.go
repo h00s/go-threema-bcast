@@ -15,12 +15,8 @@ type Client struct {
   APIKey     string
 }
 
-type Links struct {
-  Links []Link `json:"_links"`
-}
-
 type Link struct {
-  Ref  string `json:"ref"`
+  Rel  string `json:"rel"`
   Link string `json:"link"`
 }
 

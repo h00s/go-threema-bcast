@@ -5,7 +5,7 @@ import (
 )
 
 type Profile struct {
-  links Links
+  Links []Link `json:"_links"`
 }
 
 func (c *Client) GetProfile() (Profile, error) {
