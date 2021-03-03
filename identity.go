@@ -1,6 +1,9 @@
 package go_threema_bcast
 
-import "time"
+import (
+  "encoding/json"
+  "time"
+)
 
 type Identities struct {
   Links []Link `json:"_links"`
@@ -14,4 +17,19 @@ type Identity struct {
   ValidUntil time.Time `json:"validUntil"`
   Type string `json:"type"`
   RecipientLimit int `json:"recipientLimit"`
+}
+
+func (c *Client) GetIdentities() (Identities, error) {
+  var i Identities
+
+  body, err := c.Get("/identities")
+  if err != nil {
+    return i, err
+  }
+
+  if err := json.Unmarshal(body, &i); err != nil {
+    return i, err
+  }
+
+  return i, nil
 }
