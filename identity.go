@@ -2,7 +2,6 @@ package go_threema_bcast
 
 import (
   "encoding/json"
-  "time"
 )
 
 type Identities struct {
@@ -14,7 +13,7 @@ type Identity struct {
   Links []Link `json:"_links"`
   Id string `json:"id"`
   ThreemaId string `json:"threemaId"`
-  ValidUntil time.Time `json:"validUntil"`
+  ValidUntil string `json:"validUntil"`
   Type string `json:"type"`
   RecipientLimit int `json:"recipientLimit"`
 }
