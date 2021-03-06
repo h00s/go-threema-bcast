@@ -13,7 +13,7 @@ type Identity struct {
   Links []Link `json:"_links"`
   Id string `json:"id"`
   ThreemaId string `json:"threemaId"`
-  ValidUntil string `json:"validUntil"`
+  ValidUntil DateTime `json:"validUntil"`
   Type string `json:"type"`
   RecipientLimit int `json:"recipientLimit"`
 }
